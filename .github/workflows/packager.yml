@@ -29,7 +29,16 @@ jobs:
       - name: Set version
         id: set_version
         run: |
-          sed '/^release.version/s/=.*$/=${{ steps.create_release.outputs.tag_name }}/' ./gradle.properties > gradle.properties
+          sed '/^release.version/s/=.*$/=${{ steps.create_release.outputs.tag_name }}/' ./gradle.properties > ./gradle.properties.temp
+          rm gradle.properties
+          mv gradle.properties.temp gradle.properties
+
+      - name: Commit version
+        uses: stefanzweifel/git-auto-commit-action@v4
+        id: commit_version
+        with:
+          commit_message: ":robot: Update version"
+          file_pattern: "gradle.properties"
 
       - name: Package Msi
         id: build_msi
