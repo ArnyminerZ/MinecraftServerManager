@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "com.arnyminerz.minecraft.server_creator"
-version = "1.0.0"
+version = properties.getOrDefault("release.version", "1.0.0").toString()
 
 repositories {
     google()
