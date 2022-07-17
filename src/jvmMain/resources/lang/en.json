@@ -39,7 +39,7 @@
   "placeholder-command": "Command",
 
   "server-list-empty-title": "Any server available",
-  "server-list-empty-message": "You haven't created any server still. To get started, press the \"New Server\" button above.",
+  "server-list-empty-message": "You haven't created any server yet. To get started, press the \"New Server\" button above.",
 
   "form-drag-and-drop": "You can also drag and drop here",
   "form-new-server-title": "Create new Server",
