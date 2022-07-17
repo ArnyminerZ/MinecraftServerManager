@@ -1,0 +1,43 @@
+name: Packager
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Create release
+        uses: release-drafter/release-drafter@v5
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+          java-package: jdk
+          cache: 'gradle'
+
+      - name: Set version
+        id: set_version
+        run: |
+          sed '/^release.version/s/=.*$/=${{ steps.create_release.outputs.tag_name }}/' ./gradle.properties > gradle.properties
+
+      - name: Package Msi
+        id: build_msi
+        run: |
+          echo "Building ${{ steps.create_release.outputs.tag_name }}..."
+          bash ./gradlew packageMsi
+      - name: Msi Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: APK Artifact
+          path: "./build/compose/binaries/main/msi/ServerCreator-${{ steps.create_release.outputs.tag_name }}.msi"
