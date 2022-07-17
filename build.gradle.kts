@@ -47,7 +47,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "ServerCreator"
-            packageVersion = "1.0.0"
+            packageVersion = properties.getOrDefault("release.version", "1.0.0").toString()
         }
     }
 }
