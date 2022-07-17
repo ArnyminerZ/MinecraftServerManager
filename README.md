@@ -9,6 +9,8 @@ issue with a new repository, or create a new PR with the repository by yourself.
 [![Modrinth Supported][modrinth-badge]](https://modrinth.com/)
 [![Curseforge Planned][curseforge-badge]](https://www.curseforge.com/minecraft/mc-mods)
 
+# Contribution
+
 # Development
 ## Localization
 ### Initialization
